@@ -10,10 +10,11 @@ function App() {
   // This piece of state keeps the id from the selected coin to be displayed in the MainDetail component
   const [selectedCripto, setSelectedCripto] = useState(null);
   const [cryptoList, setCryptoList] = useState([]);
-  const [statusUpdates, setStatueUpdates] = useState([])
+  const [statusUpdates, setStatusUpdates] = useState([])
   useEffect(() => {
     fetch(CRIPTO_LIST).then(resp => resp.json()).then(setCryptoList)
-    fetch(STATUS_UPDATES).then(resp => resp.json()).then(setStatueUpdates)
+    fetch(STATUS_UPDATES).then(resp => resp.json()).then(news => {
+      return setStatusUpdates(news.status_updates)})
   },[])
 
 
@@ -36,9 +37,21 @@ function App() {
       <main className="main-detail">
         {selectedCripto
           ? <MainDetail selectedCripto={selectedCripto} cryptoList={cryptoList} />
-          : "Select a coin bro!"};
+          : "Select a coin bro!"}
+      
+       <ul className="newsfeed">
+         
+         {statusUpdates.map(newsItem => {
+           return (
+             <li>
+               <NewsCard newsItem={newsItem}/>
+             </li>
+           )
+         })}
+       </ul>
        
       </main>
+
      
     </>
   );

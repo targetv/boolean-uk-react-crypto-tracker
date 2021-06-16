@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCriptoUpdateUrl } from "../constants";
 
+
 // This function give us the current time in seconds
 function getCurrentTime() {
   return Math.round(Date.now() / 1000);
@@ -19,6 +20,7 @@ function convertToSeconds(dateValue) {
 
  function MainDetail({cryptoList, selectedCripto}) {
   const [currentTime, setCurrentTime] = useState("")
+  const [currentPrice, setCurrentPrice] = useState(null);
 
  
   const cryptoToRender = 
@@ -33,13 +35,22 @@ function convertToSeconds(dateValue) {
     }, 1000);
     return () =>  clearInterval(stopInterval);
   }, [])
- 
+
+  
+    
+    
+    
+    
+
+  
+  // console.log(getCriptoUpdateUrl(cryptoToRender.id))
   
   return (
     <>
       <section className="main-detail__central">
         <div className="main-detail__update">
-          {/* This part is for the challenge */}
+         {/* {statusUpdates.map(newsItem => <NewsCard newsItem={newsItem.url} />)} */}
+   
           
         </div>
         <div className="main-detail__name">
